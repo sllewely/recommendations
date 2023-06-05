@@ -1,36 +1,30 @@
-#README
+# Rails Backend API
 
-This README would normally document whatever steps are necessary to get the
-application up and running.
+Ruby version 3.2.2
 
-Things you may want to cover:
-
-* Ruby version
-
-* System dependencies
-
-* Configuration
-
-* Database creation
-
-* Database initialization
-
-* How to run the test suite
-
-* Services (job queues, cache servers, search engines, etc.)
-
-* Deployment instructions
-
-* ...
-
+Built on mac m2 chip, but deployable to x86-linux on Render.
 
 ## Lets go!
+
+```
+rails db:migrate
+```
 
 ```
 rails server
 ```
 
 
+Tests
+
+```
+rspec spec
+```
+
+
+## Check it out on Render
+
+[api/v1/tests](https://recommendations-backend-h7dq.onrender.com/api/v1/tests)
 
 
 ## First time setup

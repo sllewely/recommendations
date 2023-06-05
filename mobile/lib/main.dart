@@ -31,7 +31,7 @@ class MyApp extends StatelessWidget {
         colorScheme: ColorScheme.fromSeed(seedColor: Colors.orangeAccent),
         useMaterial3: true,
       ),
-      home: const MyHomePage(title: 'Recommendations Home'),
+      home: const MyHomePage(title: 'Recommendations'),
     );
   }
 }
@@ -56,7 +56,8 @@ class MyHomePage extends StatefulWidget {
 
 class _MyHomePageState extends State<MyHomePage> {
   int _counter = 0;
-  int selectedIndex = 0;
+  int _selectedIndex = 0;
+  final GlobalKey<ScaffoldState> _scaffoldKey = GlobalKey<ScaffoldState>();
 
   void _incrementCounter() {
     setState(() {
@@ -70,6 +71,14 @@ class _MyHomePageState extends State<MyHomePage> {
     });
   }
 
+  void _openDrawer() {
+    _scaffoldKey.currentState!.openDrawer();
+  }
+
+  void _closeDrawer() {
+    Navigator.of(context).pop();
+  }
+
   @override
   Widget build(BuildContext context) {
     // This method is rerun every time setState is called, for instance as done
@@ -78,7 +87,20 @@ class _MyHomePageState extends State<MyHomePage> {
     // The Flutter framework has been optimized to make rerunning build methods
     // fast, so that you can just rebuild anything that needs updating rather
     // than having to individually change instances of widgets.
+    Widget page;
+    switch (_selectedIndex) {
+      case 0:
+        page = const Placeholder();
+      case 1:
+        page = const Placeholder();
+      case 2:
+        page = context.widget;
+      default:
+        throw UnimplementedError('I am screaming');
+    }
+
     return Scaffold(
+      key: _scaffoldKey,
       appBar: AppBar(
         // TRY THIS: Try changing the color here to a specific color (to
         // Colors.amber, perhaps?) and trigger a hot reload to see the AppBar
@@ -88,16 +110,24 @@ class _MyHomePageState extends State<MyHomePage> {
         // the App.build method, and use it to set our appbar title.
         title: Text(widget.title),
       ),
+      drawer: Drawer(
+        child: SafeArea(child: NavigationRail(
+          extended: false,
+          destinations: const [
+            NavigationRailDestination(icon: Icon(Icons.home), label: Text('Home')),
+            NavigationRailDestination(icon: Icon(Icons.account_circle), label: Text('Account')),
+            NavigationRailDestination(icon: Icon(Icons.arrow_back_ios_new_rounded), label: Text('Close Nav Bar'))
+          ],
+        selectedIndex: _selectedIndex,
+        onDestinationSelected: (value) {
+          setState(() {
+            _selectedIndex = value;
+            _closeDrawer();
+          });
+        },
+      ))),
       body: Row(
         children: [
-          SafeArea(child: NavigationRail(
-            extended: false,
-            destinations: const [
-              NavigationRailDestination(icon: Icon(Icons.home), label: Text('Home')),
-              NavigationRailDestination(icon: Icon(Icons.account_circle), label: Text('Account')),
-            ],
-            selectedIndex: selectedIndex,
-          )),
           Expanded(child: CounterCard(counter: _counter, reset: _resetCounter))
         ]
       ),

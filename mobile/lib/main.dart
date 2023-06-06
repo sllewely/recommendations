@@ -1,11 +1,12 @@
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 
 void main() {
-  runApp(const MyApp());
+  runApp(const RecApp());
 }
 
-class MyApp extends StatelessWidget {
-  const MyApp({super.key});
+class RecApp extends StatelessWidget {
+  const RecApp({super.key});
 
   // This widget is the root of your application.
   @override
@@ -31,13 +32,13 @@ class MyApp extends StatelessWidget {
         colorScheme: ColorScheme.fromSeed(seedColor: Colors.orangeAccent),
         useMaterial3: true,
       ),
-      home: const MyHomePage(title: 'Recommendations'),
+      home: const HomePage(title: 'Recommendations'),
     );
   }
 }
 
-class MyHomePage extends StatefulWidget {
-  const MyHomePage({super.key, required this.title});
+class HomePage extends StatefulWidget {
+  const HomePage({super.key, required this.title});
 
   // This widget is the home page of your application. It is stateful, meaning
   // that it has a State object (defined below) that contains fields that affect
@@ -51,14 +52,20 @@ class MyHomePage extends StatefulWidget {
   final String title;
 
   @override
-  State<MyHomePage> createState() => _MyHomePageState();
+  State<HomePage> createState() => _HomePageState();
 }
 
-class _MyHomePageState extends State<MyHomePage> {
+class _HomePageState extends State<HomePage> with SingleTickerProviderStateMixin {
+  static const List<Tab> defaultTabs = <Tab>[
+    Tab(text: 'Saved'),
+    Tab(text: 'Feed'),
+    Tab(text: 'Popular'),
+  ];
+
   int _counter = 0;
-  int _selectedIndex = 0;
   final GlobalKey<ScaffoldState> _scaffoldKey = GlobalKey<ScaffoldState>();
 
+  late TabController _tabController;
   void _incrementCounter() {
     setState(() {
       _counter++;
@@ -71,12 +78,16 @@ class _MyHomePageState extends State<MyHomePage> {
     });
   }
 
-  void _openDrawer() {
-    _scaffoldKey.currentState!.openDrawer();
+  @override
+  void initState() {
+    super.initState();
+    _tabController = TabController(initialIndex: 1, length: defaultTabs.length, vsync: this);
   }
 
-  void _closeDrawer() {
-    Navigator.of(context).pop();
+  @override
+  void dispose() {
+    _tabController.dispose();
+    super.dispose();
   }
 
   @override
@@ -87,17 +98,6 @@ class _MyHomePageState extends State<MyHomePage> {
     // The Flutter framework has been optimized to make rerunning build methods
     // fast, so that you can just rebuild anything that needs updating rather
     // than having to individually change instances of widgets.
-    Widget page;
-    switch (_selectedIndex) {
-      case 0:
-        page = const Placeholder();
-      case 1:
-        page = const Placeholder();
-      case 2:
-        page = context.widget;
-      default:
-        throw UnimplementedError('I am screaming');
-    }
 
     return Scaffold(
       key: _scaffoldKey,
@@ -105,37 +105,51 @@ class _MyHomePageState extends State<MyHomePage> {
         // TRY THIS: Try changing the color here to a specific color (to
         // Colors.amber, perhaps?) and trigger a hot reload to see the AppBar
         // change color while the other colors stay the same.
-        backgroundColor: Theme.of(context).colorScheme.inversePrimary,
-        // Here we take the value from the MyHomePage object that was created by
-        // the App.build method, and use it to set our appbar title.
-        title: Text(widget.title),
+          backgroundColor: Theme
+              .of(context)
+              .colorScheme
+              .inversePrimary,
+          // Here we take the value from the MyHomePage object that was created by
+          // the App.build method, and use it to set our appbar title.
+          title: Text(widget.title),
+          bottom: TabBar(
+            controller: _tabController,
+            tabs: defaultTabs,
+          )
       ),
       drawer: Drawer(
-        child: SafeArea(child: NavigationRail(
-          extended: false,
-          destinations: const [
-            NavigationRailDestination(icon: Icon(Icons.home), label: Text('Home')),
-            NavigationRailDestination(icon: Icon(Icons.account_circle), label: Text('Account')),
-            NavigationRailDestination(icon: Icon(Icons.arrow_back_ios_new_rounded), label: Text('Close Nav Bar'))
-          ],
-        selectedIndex: _selectedIndex,
-        onDestinationSelected: (value) {
-          setState(() {
-            _selectedIndex = value;
-            _closeDrawer();
-          });
-        },
-      ))),
-      body: Row(
-        children: [
-          Expanded(child: CounterCard(counter: _counter, reset: _resetCounter))
-        ]
+          child: SafeArea(child: NavigationRail(
+            extended: false,
+            destinations: const [
+              NavigationRailDestination(
+                  icon: Icon(Icons.home), label: Text('Home')),
+              NavigationRailDestination(
+                  icon: Icon(Icons.account_circle), label: Text('Account')),
+              NavigationRailDestination(
+                  icon: Icon(Icons.arrow_back_ios_new_rounded),
+                  label: Text('Close Nav Bar'))
+            ],
+            selectedIndex: 0,
+          ))),
+      body: TabBarView(
+        controller: _tabController,
+        children: <Widget>[
+          const Center(
+              child: Text("Left Pane"),
+          ),
+          Center(
+              child: CounterCard(counter: _counter, reset: _resetCounter),
+          ),
+          const Center(
+              child: Text('RIGHT PANE!!'),
+          ),
+        ],
       ),
       floatingActionButton: FloatingActionButton(
         onPressed: _incrementCounter,
         tooltip: 'Increment',
         child: const Icon(Icons.add),
-      ), // This trailing comma makes auto-formatting nicer for build methods.
+      ),
     );
   }
 }

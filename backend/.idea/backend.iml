@@ -48,6 +48,7 @@
     <orderEntry type="library" scope="PROVIDED" name="debug (v1.8.0, RVM: ruby-3.2.2) [gem]" level="application" />
     <orderEntry type="library" scope="PROVIDED" name="devise (v4.9.2, RVM: ruby-3.2.2) [gem]" level="application" />
     <orderEntry type="library" scope="PROVIDED" name="diff-lcs (v1.5.0, RVM: ruby-3.2.2) [gem]" level="application" />
+    <orderEntry type="library" scope="PROVIDED" name="doorkeeper (v5.6.6, RVM: ruby-3.2.2) [gem]" level="application" />
     <orderEntry type="library" scope="PROVIDED" name="erubi (v1.12.0, RVM: ruby-3.2.2) [gem]" level="application" />
     <orderEntry type="library" scope="PROVIDED" name="globalid (v1.1.0, RVM: ruby-3.2.2) [gem]" level="application" />
     <orderEntry type="library" scope="PROVIDED" name="i18n (v1.14.1, RVM: ruby-3.2.2) [gem]" level="application" />
@@ -111,6 +112,14 @@
         <option value="devise:controllers" />
         <option value="devise:install" />
         <option value="devise:views" />
+        <option value="doorkeeper:application_owner" />
+        <option value="doorkeeper:confidential_applications" />
+        <option value="doorkeeper:enable_polymorphic_resource_owner" />
+        <option value="doorkeeper:install" />
+        <option value="doorkeeper:migration" />
+        <option value="doorkeeper:pkce" />
+        <option value="doorkeeper:previous_refresh_token" />
+        <option value="doorkeeper:views" />
         <option value="generator" />
         <option value="integration_test" />
         <option value="job" />
@@ -171,6 +180,14 @@
         <option value="devise:controllers" />
         <option value="devise:install" />
         <option value="devise:views" />
+        <option value="doorkeeper:application_owner" />
+        <option value="doorkeeper:confidential_applications" />
+        <option value="doorkeeper:enable_polymorphic_resource_owner" />
+        <option value="doorkeeper:install" />
+        <option value="doorkeeper:migration" />
+        <option value="doorkeeper:pkce" />
+        <option value="doorkeeper:previous_refresh_token" />
+        <option value="doorkeeper:views" />
         <option value="generator" />
         <option value="integration_test" />
         <option value="job" />
@@ -390,6 +407,7 @@
           <RakeTaskImpl description="Run all specs in spec directory (excluding plugin specs)" fullCommand="spec" id="spec" />
           <RakeTaskImpl id="spec">
             <subtasks>
+              <RakeTaskImpl description="Run the code examples in spec/models" fullCommand="spec:models" id="models" />
               <RakeTaskImpl description="Run the code examples in spec/requests" fullCommand="spec:requests" id="requests" />
               <RakeTaskImpl description="" fullCommand="spec:prepare" id="prepare" />
               <RakeTaskImpl description="" fullCommand="spec:statsetup" id="statsetup" />

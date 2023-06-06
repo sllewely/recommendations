@@ -14,6 +14,12 @@ rails db:migrate
 rails server
 ```
 
+Development
+
+```
+rails db:seed
+```
+
 
 Tests
 

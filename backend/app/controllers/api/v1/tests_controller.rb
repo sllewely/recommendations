@@ -3,7 +3,7 @@ class Api::V1::TestsController < ApplicationController
   # GET /tests
   def index
     @tests = Test.all
-    render json: @tests
+    render json: {total_count: @tests.count, data: @tests}
   end
 
   def create

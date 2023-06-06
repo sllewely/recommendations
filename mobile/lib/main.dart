@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:mobile/response_schema/test_list.dart';
 import 'package:provider/provider.dart';
 
 void main() {
@@ -66,6 +67,7 @@ class _HomePageState extends State<HomePage> with SingleTickerProviderStateMixin
   final GlobalKey<ScaffoldState> _scaffoldKey = GlobalKey<ScaffoldState>();
 
   late TabController _tabController;
+  late Future<TestList> futureTestList;
   void _incrementCounter() {
     setState(() {
       _counter++;
@@ -82,6 +84,7 @@ class _HomePageState extends State<HomePage> with SingleTickerProviderStateMixin
   void initState() {
     super.initState();
     _tabController = TabController(initialIndex: 1, length: defaultTabs.length, vsync: this);
+    futureTestList = fetchTestList();
   }
 
   @override
@@ -138,7 +141,21 @@ class _HomePageState extends State<HomePage> with SingleTickerProviderStateMixin
               child: Text("Left Pane"),
           ),
           Center(
-              child: CounterCard(counter: _counter, reset: _resetCounter),
+              child: CounterCard(
+                  counter: _counter,
+                  reset: _resetCounter,
+                  testText: FutureBuilder<TestList>(
+                    future: futureTestList,
+                    builder: (context, snapshot) {
+                      if (snapshot.hasData) {
+                        return Text(snapshot.data!.testList.toString());
+                      } else if (snapshot.hasError) {
+                        return Text('${snapshot.error}');
+                      }
+                      return const CircularProgressIndicator();
+                    }
+                  ),
+              ),
           ),
           const Center(
               child: Text('RIGHT PANE!!'),
@@ -159,9 +176,11 @@ class CounterCard extends StatelessWidget {
     super.key,
     required this.counter,
     required this.reset,
+    required this.testText,
   });
   final int counter;
   final void Function() reset;
+  final Widget testText;
 
   @override
   Widget build(BuildContext context) {
@@ -176,7 +195,8 @@ class CounterCard extends StatelessWidget {
             '$counter',
             style: Theme.of(context).textTheme.headlineMedium,
           ),
-          ElevatedButton(onPressed: reset, child: const Icon(Icons.refresh))
+          ElevatedButton(onPressed: reset, child: const Icon(Icons.refresh)),
+          testText,
         ],
       ),
     );

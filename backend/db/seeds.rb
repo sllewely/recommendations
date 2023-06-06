@@ -13,6 +13,20 @@ if Doorkeeper::Application.count.zero?
 end
 
 
-User.first_or_create(email: 'ziggy@example.com',
-                     password: 'password',
-                     password_confirmation: 'password')
+ziggy = User.find_or_create_by(email: 'ziggy@example.com') do |user|
+  user.password = 'password'
+  user.password_confirmation = 'password'
+end
+ion = User.find_or_create_by(email: 'ion@example.com') do |user|
+  user.password = 'password'
+  user.password_confirmation = 'password'
+end
+giles = User.find_or_create_by(email: 'giles@example.com') do |user|
+  user.password = 'password'
+  user.password_confirmation = 'password'
+end
+
+
+Friendship.find_or_create_by(requestor: ziggy, requested: ion) { |f| f.accepted_at = DateTime.now }
+Friendship.find_or_create_by(requestor: ziggy, requested: giles)
+Friendship.find_or_create_by(requestor: ion, requested: giles)

@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2023_06_07_182100) do
+ActiveRecord::Schema[7.0].define(version: 2023_06_07_204139) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
@@ -22,6 +22,12 @@ ActiveRecord::Schema[7.0].define(version: 2023_06_07_182100) do
     t.datetime "updated_at", null: false
     t.index ["from_user_id"], name: "index_friendships_on_from_user_id"
     t.index ["to_user_id"], name: "index_friendships_on_to_user_id"
+  end
+
+  create_table "media", force: :cascade do |t|
+    t.string "name"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
   end
 
   create_table "oauth_access_grants", force: :cascade do |t|
@@ -73,6 +79,17 @@ ActiveRecord::Schema[7.0].define(version: 2023_06_07_182100) do
     t.integer "legs"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+  end
+
+  create_table "user_media", force: :cascade do |t|
+    t.bigint "medium_id"
+    t.bigint "user_id"
+    t.integer "rating"
+    t.text "notes"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["medium_id"], name: "index_user_media_on_medium_id"
+    t.index ["user_id"], name: "index_user_media_on_user_id"
   end
 
   create_table "users", force: :cascade do |t|

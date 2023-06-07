@@ -9,5 +9,7 @@ OAuth2Client client = OAuth2Client(
 );
 
 OAuth2Helper oAuth2Helper = OAuth2Helper(client,
-    
-    clientId: clientId)
+  grantType: OAuth2Helper.authorizationCode,
+  enablePKCE: true,
+  clientId: "reSVxvuBow1vnuwt3_yd1nG-b3sOnNEb2DvEP1uaHTo",
+);

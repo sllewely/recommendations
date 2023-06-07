@@ -26,6 +26,4 @@ class Api::V1::MediaController < Api::V1::ApiController
     params.require(:media).permit(:name, user_medium_attributes: [:notes])
   end
 
-
-
 end

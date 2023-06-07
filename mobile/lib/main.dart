@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:mobile/response_schema/test_list.dart';
+import 'package:mobile/http/test_list.dart';
 import 'package:provider/provider.dart';
 
 void main() {

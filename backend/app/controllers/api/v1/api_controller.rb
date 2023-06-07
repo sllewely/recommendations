@@ -1,5 +1,5 @@
 
-class ApiController < ApplicationController
+class Api::V1::ApiController < ApplicationController
   # equivalent of authenticate_user! on devise, but this one will check the oauth token
   # #before_action :authenticate_user!
   before_action :doorkeeper_authorize!

@@ -14,7 +14,7 @@ rails db:migrate
 rails server
 ```
 
-Development
+### Development
 
 ```
 rails db:seed
@@ -25,6 +25,20 @@ Tests
 
 ```
 rspec spec
+```
+
+### Database
+
+View column attributes of a model from ```rails c```
+
+```
+User.columns_hash
+```
+
+Migrate
+
+```shell
+rails db:migrate
 ```
 
 

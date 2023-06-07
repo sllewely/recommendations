@@ -20,12 +20,22 @@ rails server
 rails db:seed
 ```
 
+Debugger?  Type ```debugger``` in code to set breakpoint locally.
+
 
 Tests
 
 ```
 rspec spec
 ```
+
+Get Client keys in rails c
+
+```shell
+Doorkeeper::Application.find_by(name: "iOS Client").secret
+Doorkeeper::Application.find_by(name: "iOS Client").uid
+```
+
 
 ### Database
 

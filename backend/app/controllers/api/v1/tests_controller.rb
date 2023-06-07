@@ -1,4 +1,4 @@
-class Api::V1::TestsController < ApplicationController
+class Api::V1::TestsController < Api::V1::ApiController
 
   # GET /tests
   def index

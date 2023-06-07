@@ -68,5 +68,19 @@ Doorkeeper::Application.find_by(name: "iOS Client").secret
 Doorkeeper::Application.find_by(name: "iOS Client").uid
 ```
 
+## Media
 
+Requires auth
+
+---
+
+List given user's media
+
+```GET /api/v1/users/1/media```
+
+---
+
+Save a media for a user
+
+```POST api/v1/users/1/media```
 

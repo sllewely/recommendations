@@ -45,6 +45,12 @@ View column attributes of a model from ```rails c```
 User.columns_hash
 ```
 
+View all tables
+
+```shell
+ActiveRecord::Base.connection.tables
+```
+
 Migrate
 
 ```shell

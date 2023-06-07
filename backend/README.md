@@ -60,6 +60,12 @@ database: backend_development
    up     20230606151105  Add namesto users
 ```
 
+Nuke it
+
+```shell
+rails db:drop db:create db:migrate
+```
+
 
 ## Check it out on Render
 

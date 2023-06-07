@@ -41,6 +41,25 @@ Migrate
 rails db:migrate
 ```
 
+```shell
+rails db:rollback
+```
+
+View status of applied migrations
+
+```shell
+sllewely@Sarahs-Air backend % rails db:migrate:status
+
+database: backend_development
+
+ Status   Migration ID    Migration Name
+--------------------------------------------------
+   up     20230605194951  Create tests
+   up     20230606130646  Devise create users
+   up     20230606134035  Create doorkeeper tables
+   up     20230606151105  Add namesto users
+```
+
 
 ## Check it out on Render
 

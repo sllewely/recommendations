@@ -12,6 +12,9 @@ if Doorkeeper::Application.count.zero?
   Doorkeeper::Application.create!(name: "Android Client", redirect_uri: "", scopes: "")
 end
 
+Test.first_or_create(cat_name: 'Ziggy', legs: 3)
+Test.first_or_create(cat_name: 'Ion', legs: 4)
+
 
 ziggy = User.find_or_create_by(email: 'ziggy@example.com') do |user|
   user.password = 'password'

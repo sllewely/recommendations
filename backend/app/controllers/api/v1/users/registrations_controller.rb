@@ -4,15 +4,22 @@ class Api::V1::Users::RegistrationsController < Devise::RegistrationsController
   # before_action :configure_sign_up_params, only: [:create]
   # before_action :configure_account_update_params, only: [:update]
 
+  skip_before_action :verify_authenticity_token, :only => :create
+
   # GET /resource/sign_up
   # def new
   #   super
   # end
 
-  # POST /resource
-  # def create
-  #   super
-  # end
+  def create
+      build_resource(user_signup_params)
+      if resource.save
+        render :status => 200, :json => resource
+      else
+        render :json => resource.errors, :status => :unprocessable_entity
+      end
+  end
+
 
   # GET /resource/edit
   # def edit
@@ -59,4 +66,9 @@ class Api::V1::Users::RegistrationsController < Devise::RegistrationsController
   # def after_inactive_sign_up_path_for(resource)
   #   super(resource)
   # end
+  private
+
+  def user_signup_params
+    params.require(:user).permit(:first_name, :last_name, :email, :password)
+  end
 end

@@ -6,6 +6,6 @@ module Types
     field :name, String
     field :created_at, GraphQL::Types::ISO8601DateTime, null: false
     field :updated_at, GraphQL::Types::ISO8601DateTime, null: false
-    field :media_type, Integer
+    field :media_category, MediaCategoryEnum
   end
 end

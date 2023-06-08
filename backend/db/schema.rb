@@ -28,7 +28,7 @@ ActiveRecord::Schema[7.0].define(version: 2023_06_07_230340) do
     t.string "name"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.integer "media_type"
+    t.integer "media_category"
   end
 
   create_table "oauth_access_grants", force: :cascade do |t|

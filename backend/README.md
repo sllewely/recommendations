@@ -82,6 +82,16 @@ Nuke it
 rails db:drop db:create db:migrate
 ```
 
+## Graphql
+
+[http://localhost:3000/graphiql](http://localhost:3000/graphiql)
+
+New type
+
+```shell
+rails g graphql:object user
+```
+
 
 ## Check it out on Render
 

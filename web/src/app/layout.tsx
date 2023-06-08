@@ -1,4 +1,5 @@
 import './globals.css'
+import { Providers } from '@/redux/provider'
 import { Inter } from 'next/font/google'
 
 const inter = Inter({ subsets: ['latin'] })
@@ -16,10 +17,12 @@ export default function RootLayout({
   return (
     <html lang='en'>
       <body>
-        <nav>
-          <h1 className="text-3xl">Recommendations</h1>
-        </nav>
-        {children}
+        <Providers>
+          <nav>
+            <h1 className='text-3xl'>Recommendations</h1>
+          </nav>
+          {children}
+        </Providers>
       </body>
     </html>
   );

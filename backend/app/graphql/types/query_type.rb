@@ -10,15 +10,21 @@ module Types
           [Types::UserType],
           null: false,
           description: "Return a list of users"
+    def users
+      User.all
+    end
+
+    field :user, Types:UserType, null: false do
+      argument :id, ID, required: true
+    end
+    def user(id:)
+      User.find(id)
+    end
 
     field :user_medium,
           [Types::UserMediaType],
           null: false,
           description: "Return a list of user media"
-
-    def users
-      User.all
-    end
 
     # TODO: remove me
     field :test_field, String, null: false,

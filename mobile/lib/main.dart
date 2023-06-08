@@ -1,10 +1,22 @@
 import 'package:flutter/material.dart';
+import 'package:mobile/auth.dart';
+import 'package:mobile/auth_helper.dart';
 import 'package:mobile/http/test_list.dart';
+import 'package:mobile/widgets/signed_in_wrapper.dart';
+import 'package:oauth2_client/access_token_response.dart';
 import 'package:provider/provider.dart';
 
+const authConfig = AuthConfig(signInUrl: '127.0.0.1:3000/oauth/token', signUpUrl: '127.0.0.1:3000/api/v1/users', tokenUrl: '127.0.0.1:3000/oauth/token');
+
 void main() {
-  runApp(const RecApp());
+  runApp(
+    ChangeNotifierProvider(
+      create: (context) => AuthHelper(authConfig),
+      child: const RecApp(),
+    ),
+  );
 }
+
 
 class RecApp extends StatelessWidget {
   const RecApp({super.key});
@@ -68,6 +80,7 @@ class _HomePageState extends State<HomePage> with SingleTickerProviderStateMixin
 
   late TabController _tabController;
   late Future<TestList> futureTestList;
+  late Future<AccessTokenResponse> futureAccessToken;
   void _incrementCounter() {
     setState(() {
       _counter++;
@@ -85,6 +98,7 @@ class _HomePageState extends State<HomePage> with SingleTickerProviderStateMixin
     super.initState();
     _tabController = TabController(initialIndex: 1, length: defaultTabs.length, vsync: this);
     futureTestList = fetchTestList();
+
   }
 
   @override
@@ -137,8 +151,10 @@ class _HomePageState extends State<HomePage> with SingleTickerProviderStateMixin
       body: TabBarView(
         controller: _tabController,
         children: <Widget>[
-          const Center(
-              child: Text("Left Pane"),
+          const SignedInWrapper(
+            wrapped: Center(
+              child: Text('Hello signed in!'),
+            ),
           ),
           Center(
               child: CounterCard(

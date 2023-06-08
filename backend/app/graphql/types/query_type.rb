@@ -14,7 +14,7 @@ module Types
       User.all
     end
 
-    field :user, Types:UserType, null: false do
+    field :user, Types::UserType, null: false do
       argument :id, ID, required: true
     end
     def user(id:)
@@ -22,7 +22,7 @@ module Types
     end
 
     field :user_medium,
-          [Types::UserMediaType],
+          [Types::UserMediumType],
           null: false,
           description: "Return a list of user media"
 

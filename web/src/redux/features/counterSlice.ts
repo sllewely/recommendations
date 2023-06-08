@@ -1,4 +1,4 @@
-
+// just to see redux behavior as counter in about page which wont be staying there for long
 import { createSlice, PayloadAction } from "@reduxjs/toolkit";
 
 type CounterState = {
@@ -36,4 +36,5 @@ export const {
   decrementByAmount,
   reset,
 } = counter.actions;
+
 export default counter.reducer;

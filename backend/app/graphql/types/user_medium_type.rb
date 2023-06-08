@@ -4,6 +4,7 @@ module Types
   class UserMediumType < Types::BaseObject
     field :id, ID, null: false
     field :medium_id, Integer
+    field :medium, Types::MediumType
     field :user_id, Integer
     field :user, Types::UserType
     field :rating, Integer

@@ -42,6 +42,14 @@ Body:
 }
 ```
 
+Refresh tokens are the same endpoint with different parameters
+
+```shell
+curl -F grant_type=refresh_token
+-F refresh_token=Em1Czlf8WRn1g23pRADUNC4DakcGKwCsy4ubuz1HQzY
+-X POST http://localhost:3000/oauth/token
+```
+
 ---
 
 Auth Headers for an authenticated endpoint
@@ -55,6 +63,9 @@ Headers:
   "Authorization": "Bearer eL0GRRgrmVe5lLcYoxcCegqMIhGbyvpOYxTG6c1lx5s"
 }
 ```
+
+
+
 
 ---
 

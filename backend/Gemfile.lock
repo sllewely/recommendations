@@ -88,6 +88,7 @@ GEM
     erubi (1.12.0)
     globalid (1.1.0)
       activesupport (>= 5.0)
+    graphql (2.0.22)
     i18n (1.14.1)
       concurrent-ruby (~> 1.0)
     io-console (0.6.0)
@@ -198,6 +199,7 @@ DEPENDENCIES
   debug
   devise
   doorkeeper
+  graphql (~> 2.0)
   pg (~> 1.1)
   puma (~> 5.0)
   rails (~> 7.0.5)

@@ -25,6 +25,9 @@ module Types
           [Types::UserMediumType],
           null: false,
           description: "Return a list of user media"
+    def user_medium
+      UserMedium.all
+    end
 
     # TODO: remove me
     field :test_field, String, null: false,

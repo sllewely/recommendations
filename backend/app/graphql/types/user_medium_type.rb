@@ -5,6 +5,7 @@ module Types
     field :id, ID, null: false
     field :medium_id, Integer
     field :user_id, Integer
+    field :user, Types::UserType
     field :rating, Integer
     field :notes, String
     field :created_at, GraphQL::Types::ISO8601DateTime, null: false

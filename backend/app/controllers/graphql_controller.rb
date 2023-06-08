@@ -4,7 +4,7 @@ class GraphqlController < ApplicationController
   # but you'll have to authenticate your user separately
   protect_from_forgery with: :null_session
 
-  # before_action :doorkeeper_authorize!
+  before_action :doorkeeper_authorize!
 
   # Skip checking CSRF token authenticity for API requests.
   skip_before_action :verify_authenticity_token

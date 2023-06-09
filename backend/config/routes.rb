@@ -12,10 +12,10 @@ Rails.application.routes.draw do
   namespace :api do
     namespace :v1 do
       resources :tests
-      resources :users do
-        resources :media
-
-      end
+      # resources :users do
+      #   resources :media
+      #
+      # end
 
     end
   end

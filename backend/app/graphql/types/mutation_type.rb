@@ -2,6 +2,7 @@ module Types
   class MutationType < Types::BaseObject
 
     field :create_medium, mutation: Mutations::CreateMedium
+    field :create_user_medium, mutation: Mutations::CreateUserMedium
 
     # TODO: remove me
     field :test_field, String, null: false,

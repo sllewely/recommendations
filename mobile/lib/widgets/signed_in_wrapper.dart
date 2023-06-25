@@ -1,4 +1,4 @@
-import 'package:flutter/cupertino.dart';
+import 'package:flutter/material.dart';
 import 'package:mobile/auth_helper.dart';
 import 'package:provider/provider.dart';
 
@@ -14,7 +14,17 @@ class SignedInWrapper extends StatelessWidget {
         if (authHelper.currentUser.isSignedIn()) {
           return wrapped;
         } else {
-          return const Text('You are not signed in! Click here to sign in');
+          return Column(
+            children: <Widget>[
+              const Text('You are not signed in!'),
+              ElevatedButton(
+                  onPressed: () {
+                    Navigator.pushNamed(context, '/signin');
+                  },
+                  child: const Text('Sign In')
+              ),
+            ],
+          );
         }
       }
     );

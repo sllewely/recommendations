@@ -7,7 +7,13 @@ import 'package:mobile/widgets/signed_in_wrapper.dart';
 import 'package:oauth2_client/access_token_response.dart';
 import 'package:provider/provider.dart';
 
-const authConfig = AuthConfig(signInUrl: '127.0.0.1:3000/oauth/token', signUpUrl: '127.0.0.1:3000/api/v1/users', tokenUrl: '127.0.0.1:3000/oauth/token');
+const authConfig = AuthConfig(
+  signInUrl: 'http://127.0.0.1:3000/oauth/token',
+  signUpUrl: 'http://127.0.0.1:3000/api/v1/users',
+  tokenUrl: 'http://127.0.0.1:3000/oauth/token',
+  clientId: "reSVxvuBow1vnuwt3_yd1nG-b3sOnNEb2DvEP1uaHTo",
+  clientSecret: "uQ2wRf2lgFHy1SvASLIPSxyqBshexi-GTzeWbwdhw5s",
+);
 
 void main() {
   runApp(
@@ -155,9 +161,15 @@ class _HomePageState extends State<HomePage> with SingleTickerProviderStateMixin
       body: TabBarView(
         controller: _tabController,
         children: <Widget>[
-          const SignedInWrapper(
+          SignedInWrapper(
             wrapped: Center(
-              child: Text('Hello signed in!'),
+              child: Consumer<AuthHelper>(
+                builder: (context, authHelper, child) {
+                  var firstName = authHelper.currentUser.firstName;
+                  var lastName = authHelper.currentUser.lastName;
+                  return Text("Hello $firstName $lastName");
+                }
+              ),
             ),
           ),
           Center(

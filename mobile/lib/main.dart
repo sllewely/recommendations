@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:mobile/auth.dart';
 import 'package:mobile/auth_helper.dart';
 import 'package:mobile/http/test_list.dart';
+import 'package:mobile/sign_in.dart';
 import 'package:mobile/widgets/signed_in_wrapper.dart';
 import 'package:oauth2_client/access_token_response.dart';
 import 'package:provider/provider.dart';
@@ -46,6 +47,9 @@ class RecApp extends StatelessWidget {
         useMaterial3: true,
       ),
       home: const HomePage(title: 'Recommendations'),
+      routes: <String, WidgetBuilder> {
+        '/signin': (BuildContext context) => const SignUpPage()
+      },
     );
   }
 }

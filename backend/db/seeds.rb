@@ -16,15 +16,15 @@ Test.first_or_create(cat_name: 'Ziggy', legs: 3)
 Test.first_or_create(cat_name: 'Ion', legs: 4)
 
 
-ziggy = User.find_or_create_by(email: 'ziggy@example.com') do |user|
+ziggy = User.find_or_create_by(first_name: 'Ziggy', last_name: 'Boy', email: 'ziggy@example.com') do |user|
   user.password = 'password'
   user.password_confirmation = 'password'
 end
-ion = User.find_or_create_by(email: 'ion@example.com') do |user|
+ion = User.find_or_create_by(first_name: 'Ion', last_name: 'Princess', email: 'ion@example.com') do |user|
   user.password = 'password'
   user.password_confirmation = 'password'
 end
-giles = User.find_or_create_by(email: 'giles@example.com') do |user|
+giles = User.find_or_create_by(first_name: 'Giles', last_name: 'Baby', email: 'giles@example.com') do |user|
   user.password = 'password'
   user.password_confirmation = 'password'
 end

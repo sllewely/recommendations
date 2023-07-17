@@ -26,7 +26,8 @@ module Types
           null: false,
           description: "Return a list of user media"
     def user_media
-      UserMedium.all
+      current_user = context[:current_user]
+      UserMedium.with_access(current_user)
     end
 
     field :media,

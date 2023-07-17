@@ -148,3 +148,17 @@ bundle install
 ```
 rails db:create
 ```
+
+
+## Testing the Graphql API
+
+[API.md](https://github.com/sllewely/recommendations/blob/main/backend/API.md)
+
+- Start the server ```rails s```
+- Get oauth token with [POST /oauth/token](https://github.com/sllewely/recommendations/blob/main/backend/API.md)
+- Visit [http://localhost:3000/graphiql](http://localhost:3000/graphiql)
+- Provide Auth in headers like: https://github.com/sllewely/recommendations/pull/27
+
+
+
+
